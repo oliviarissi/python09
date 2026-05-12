@@ -37,7 +37,7 @@ def main() -> None:
       last_maintenance="2026-05-10T14:30:00"
     )
     print_station(station_valid)
-  except as e:
+  except ValidationError as e:
     print("Expected validation error:")
     print(e)
 
@@ -54,7 +54,7 @@ def main() -> None:
       is_operational=True,
     )
     print_station(station_invalid)
-  except as e:
+  except ValidationError as e:
     print("Expected validation error:")
     print(e)
 
