@@ -3,6 +3,14 @@ from enum import Enum
 from typing import Optional
 from datetime import datetime
 
+
+class ContactType(str, Enum):
+  radio = "radio"
+  visual = "visual"
+  physical = "physical"
+  telepathic = "telepathic"
+
+
 class AlienContact(BaseModel):
   contact_id: str = Field(..., min_length=5, max_length=15)
   timestamp: datetime = Field(...)
@@ -16,10 +24,10 @@ class AlienContact(BaseModel):
 
   @model_validator(mode=’after’)
   def validate(self) -> AlienContact:
-    
+
     if not self.contact_id.startswith("AC"):
       raise ValueError("Contact ID must start with "AC" (Alien Contact)")
-      
+
     if self.contact_type == ContactType.physical and not self.is_verified:
       raise ValueError("Physical contact reports must be verified")
 
@@ -42,6 +50,7 @@ def print_station(contact: AlienContact) -> None:
   print(f"Witnesses {contact.witness_count}")
   if contact.message_received:
     print(f"Message: '{contact.message_received}'")
+
 
 def main() -> None:
 
@@ -87,5 +96,3 @@ def main() -> None:
 
 if __name__ == "__main__":
   main()
-
-
