@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
 
-from pydantic import BaseModel, Field, ValidationError, model_validator
 from enum import Enum
 from typing import Optional
 from datetime import datetime
+
+try:
+    from pydantic import BaseModel, Field, ValidationError, model_validator  # type: ignore[import-not-found]
+except ModuleNotFoundError as e:
+    raise SystemExit(
+        "Script requires pydantic. Install it with: pip install pydantic"
+    ) from e
 
 
 class ContactType(str, Enum):

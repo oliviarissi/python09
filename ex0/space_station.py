@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
 
-from pydantic import BaseModel, Field, ValidationError
 from typing import Optional
 from datetime import datetime
+
+try:
+    from pydantic import BaseModel, Field, ValidationError  # type: ignore[import-not-found]
+except ModuleNotFoundError as e:
+    raise SystemExit(
+        "Script requires pydantic. Install it with: pip install pydantic"
+    ) from e
 
 
 class SpaceStation(BaseModel):
