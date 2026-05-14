@@ -36,19 +36,19 @@ class SpaceMission(BaseModel):
 
     @model_validator(mode='after')
     def validate(self) -> "SpaceMission":
-        if not self.mission_name.startswith("M"):
+        if not self.mission_id.startswith("M"):
             raise ValueError("Mission ID must start with 'M'")
         if not any(
             c.rank in (Rank.commander, Rank.captain)
             for c in self.crew
         ):
             raise ValueError("Must have at least one Commander or Captain")
-        if self.duration_days > 360:
+        if self.duration_days > 365:
             experienced = sum(c.years_experience >= 5 for c in self.crew)
             if experienced < len(self.crew) / 2:
                 raise ValueError(
                     "Long missions (> 365 days) need 50% "
-                    "experienced crew (5+ years)'"
+                    "experienced crew (5+ years)"
                 )
         if not all(c.is_active for c in self.crew):
             raise ValueError("All crew members must be active")
