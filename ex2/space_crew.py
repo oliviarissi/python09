@@ -5,7 +5,12 @@ from typing import List
 from datetime import datetime
 
 try:
-    from pydantic import BaseModel, Field, ValidationError, model_validator  # type: ignore[import-not-found]
+    from pydantic import (  # type: ignore[import-not-found]
+        BaseModel,
+        Field,
+        ValidationError,
+        model_validator,
+     )
 except ModuleNotFoundError as e:
     raise SystemExit(
         "Script requires pydantic. Install it with: pip install pydantic"

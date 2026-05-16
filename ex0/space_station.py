@@ -4,7 +4,11 @@ from typing import Optional
 from datetime import datetime
 
 try:
-    from pydantic import BaseModel, Field, ValidationError  # type: ignore[import-not-found]
+    from pydantic import (  # type: ignore[import-not-found]
+        BaseModel,
+        Field,
+        ValidationError,
+     )
 except ModuleNotFoundError as e:
     raise SystemExit(
         "Script requires pydantic. Install it with: pip install pydantic"
